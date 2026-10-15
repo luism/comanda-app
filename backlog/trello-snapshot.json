@@ -1,7 +1,7 @@
 {
   "tablero": "Comanda – App de Pedidos (Demo SDD)",
   "url": "https://trello.com/b/9l2wJjtU/comanda-app-de-pedidos-demo-sdd",
-  "leidoEn": "2026-10-15T19:15:48.686Z",
+  "leidoEn": "2026-10-15T19:40:54.583Z",
   "tarjetas": [
     {
       "nombre": "E1 · Catálogo y Carrito",
@@ -19,25 +19,31 @@
       "nombre": "E3 · Gestión del local y seguimiento",
       "lista": "📚 Épicas",
       "url": "https://trello.com/c/BgIpcLgT",
-      "descripcion": "**Objetivo:** que el local pueda atender los pedidos que entran y que el cliente sepa en qué estado está el suyo.\n\n**Features**\n- F3.1 · Panel de pedidos del local\n- F3.2 · Seguimiento del pedido\n\n**Estados de un pedido:** RECIBIDO → EN_PREPARACION → EN_CAMINO → ENTREGADO (o CANCELADO)."
+      "descripcion": "**Objetivo:** que el local pueda atender los pedidos que entran y que el cliente sepa en qué estado está el suyo.\n\n**Features**\n- F3.1 · Lista de pedidos del local\n- F3.2 · Avanzar el estado de un pedido\n- F3.3 · Seguimiento del pedido\n\n**Estados de un pedido:** RECIBIDO → EN_PREPARACION → EN_CAMINO → ENTREGADO (o CANCELADO)."
     },
     {
       "nombre": "F2.2 · Pago en efectivo con vuelto",
       "lista": "📋 Backlog (Features)",
       "url": "https://trello.com/c/e7aiAk1l",
-      "descripcion": "**Épica:** E2 · Checkout con pago contra entrega\n**Prioridad:** Must · **Estimación:** 3 pts\n**Depende de:** F2.1\n**Demo en clase:** 1ª feature\n\n## Historias de usuario\n\n### HU-08 · Indicar con cuánto pago\nComo cliente quiero indicar con qué monto voy a pagar en efectivo para que el repartidor me lleve el vuelto justo.\n\n**Criterios de aceptación**\n- Dado un pedido de $8.500, cuando indico que pago con $10.000, entonces veo \"Vuelto: $1.500\" antes de confirmar.\n- Dado un monto menor al total, cuando intento confirmar, entonces no puedo y veo \"El monto debe ser igual o mayor al total\".\n- Dado que marco \"Pago con el monto justo\", entonces el monto queda igual al total y el vuelto es $0.\n- La API rechaza con 400 un pedido cuyo monto de pago sea menor al total calculado por el servidor.\n- Los montos son en pesos enteros (sin centavos).\n\n### HU-09 · Ver el vuelto a llevar\nComo repartidor quiero ver en el pedido con cuánto paga el cliente y cuánto vuelto llevar para no quedarme sin cambio.\n\n**Criterios de aceptación**\n- Dado un pedido creado, cuando lo consulto por la API, entonces incluye `pagaCon` y `vuelto`.\n- El vuelto lo calcula el servidor (pagaCon − total), nunca el navegador.\n- En la pantalla de confirmación se muestra el número de pedido, el total, con cuánto paga y el vuelto."
+      "descripcion": "**Épica:** E2 · Checkout con pago contra entrega\n**Prioridad:** Must · **Estimación:** 2 pts\n**Depende de:** F2.1\n**Demo en clase:** 1ª feature\n\n## Historias de usuario\n\n### HU-08 · Indicar con cuánto pago\nComo cliente quiero indicar con qué monto voy a pagar en efectivo para que el repartidor me lleve el vuelto justo.\n\n**Criterios de aceptación**\n- Dado un pedido de $8.500, cuando escribo que pago con $10.000, entonces veo \"Vuelto: $1.500\" antes de confirmar.\n- Dado un monto menor al total, cuando intento confirmar, entonces veo \"El monto debe ser igual o mayor al total\". La API también rechaza ese pedido con 400.\n- Dado un pedido confirmado, la pantalla de confirmación muestra con cuánto paga y el vuelto (los calcula el servidor)."
     },
     {
-      "nombre": "F3.1 · Panel de pedidos del local",
+      "nombre": "F3.1 · Lista de pedidos del local",
       "lista": "📋 Backlog (Features)",
       "url": "https://trello.com/c/q4voNTvI",
-      "descripcion": "**Épica:** E3 · Gestión del local y seguimiento\n**Prioridad:** Must · **Estimación:** 5 pts\n**Depende de:** F2.1\n**Demo en clase:** 2ª feature\n\n## Historias de usuario\n\n### HU-10 · Ver pedidos activos\nComo encargado del local quiero ver los pedidos que todavía no se entregaron para saber qué tengo que preparar.\n\n**Criterios de aceptación**\n- Dado que hay pedidos creados, cuando entro a la pantalla \"Local\", entonces veo los pedidos que no están ENTREGADO ni CANCELADO, del más antiguo al más nuevo.\n- De cada pedido veo: número, hora, nombre del cliente, dirección, productos, total y estado.\n- Si el pedido tiene datos de pago en efectivo (F2.2), también veo con cuánto paga y el vuelto.\n- La API expone `GET /api/pedidos?activos=true`.\n\n### HU-11 · Avanzar el estado de un pedido\nComo encargado quiero pasar un pedido al siguiente estado para que el equipo sepa en qué etapa está.\n\n**Criterios de aceptación**\n- El flujo es RECIBIDO → EN_PREPARACION → EN_CAMINO → ENTREGADO.\n- Dado un pedido en RECIBIDO, cuando toco \"Avanzar\", entonces pasa a EN_PREPARACION.\n- Dado un intento de saltear un estado o volver atrás, la API responde 409 con un mensaje claro.\n- Dado un pedido ENTREGADO, entonces ya no aparece en el panel ni se puede modificar.\n- La API expone `PATCH /api/pedidos/:id/estado` con body `{ \"estado\": \"EN_PREPARACION\" }`.\n\n### HU-12 · Cancelar un pedido\nComo encargado quiero cancelar un pedido cuando el cliente se arrepiente o no hay stock.\n\n**Criterios de aceptación**\n- Solo se puede cancelar en RECIBIDO o EN_PREPARACION.\n- Cancelar un pedido EN_CAMINO o ENTREGADO responde 409.\n- La app pide confirmación antes de cancelar."
+      "descripcion": "**Épica:** E3 · Gestión del local y seguimiento\n**Prioridad:** Must · **Estimación:** 2 pts\n**Depende de:** F2.1\n**Demo en clase:** 2ª feature\n\n## Historias de usuario\n\n### HU-10 · Ver los pedidos que entraron\nComo encargado del local quiero ver los pedidos que todavía no se entregaron para saber qué tengo que preparar.\n\n**Criterios de aceptación**\n- Dado que hay pedidos creados, cuando entro a la pantalla \"Local\" (`/local`), entonces veo una lista con número, hora, nombre del cliente, dirección, total y estado de cada pedido.\n- Los pedidos aparecen del más antiguo al más nuevo y no se muestran los ENTREGADO ni los CANCELADO.\n- La API expone `GET /api/pedidos` con esa misma lista."
     },
     {
-      "nombre": "F3.2 · Seguimiento del pedido",
+      "nombre": "F3.2 · Avanzar el estado de un pedido",
       "lista": "📋 Backlog (Features)",
       "url": "https://trello.com/c/XFCIea0g",
-      "descripcion": "**Épica:** E3 · Gestión del local y seguimiento\n**Prioridad:** Should · **Estimación:** 2 pts\n**Depende de:** F3.1\n**Demo en clase:** 3ª feature (opcional, si sobra tiempo)\n\n## Historias de usuario\n\n### HU-13 · Consultar el estado de mi pedido\nComo cliente quiero consultar el estado de mi pedido con su número para saber cuándo llega.\n\n**Criterios de aceptación**\n- Dado un número de pedido existente, cuando lo ingreso en \"Seguir mi pedido\", entonces veo su estado actual en lenguaje claro (ej. \"Tu pedido está en camino\").\n- Veo una línea de tiempo con los 4 estados y el actual resaltado.\n- Dado un número inexistente, entonces veo \"No encontramos ese pedido\".\n- La pantalla de confirmación del pedido tiene un enlace directo al seguimiento.\n- La API expone `GET /api/pedidos/numero/:numero` y no devuelve el teléfono ni la dirección del cliente."
+      "descripcion": "**Épica:** E3 · Gestión del local y seguimiento\n**Prioridad:** Must · **Estimación:** 2 pts\n**Depende de:** F3.1\n**Demo en clase:** 3ª feature (si sobra tiempo)\n\n## Historias de usuario\n\n### HU-11 · Pasar un pedido al siguiente estado\nComo encargado quiero pasar un pedido al siguiente estado para que el equipo sepa en qué etapa está.\n\n**Criterios de aceptación**\n- El orden es RECIBIDO → EN_PREPARACION → EN_CAMINO → ENTREGADO. En la lista del local, cada pedido tiene un botón \"Avanzar\" que lo pasa al estado siguiente.\n- Dado un pedido ENTREGADO, cuando se intenta avanzarlo, la API responde 409 con el mensaje \"El pedido ya fue entregado\".\n- La API expone `PATCH /api/pedidos/:id/avanzar`."
+    },
+    {
+      "nombre": "F3.3 · Seguimiento del pedido",
+      "lista": "📋 Backlog (Features)",
+      "url": "https://trello.com/c/eqqF90zG",
+      "descripcion": "**Épica:** E3 · Gestión del local y seguimiento\n**Prioridad:** Should · **Estimación:** 2 pts\n**Depende de:** F3.2\n**Demo en clase:** opcional / para que lo hagan los grupos\n\n## Historias de usuario\n\n### HU-13 · Consultar el estado de mi pedido\nComo cliente quiero ver el estado de mi pedido para saber cuándo llega.\n\n**Criterios de aceptación**\n- Dado un pedido confirmado, la pantalla de confirmación muestra el estado actual en lenguaje claro (ej. \"Tu pedido está en camino\").\n- La pantalla tiene un botón \"Actualizar\" que vuelve a consultar el estado.\n- Dado un número de pedido que no existe, se ve \"No encontramos ese pedido\"."
     },
     {
       "nombre": "F1.1 · Ver el menú",

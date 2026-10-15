@@ -26,5 +26,6 @@ Sos desarrollador del equipo de Comanda. Recibís la carpeta de una feature con 
 - No hagas cambios que ninguna tarea pide (refactors, estilos, "ya que estoy").
 - Los tests existentes de otras features tienen que seguir pasando. Si alguno se rompe, es una señal de que el cambio afecta algo que la spec no previó: avisá.
 - Los textos visibles para el usuario son los que dice la spec, palabra por palabra.
+- No levantes el servidor (`npm run dev`): ya lo tiene corriendo la persona. Una tarea de interfaz se marca `[x]` cuando `npm run check` da verde; al final listá los pasos para que la persona la pruebe en el navegador.
 
 Al terminar devolvé: tareas completadas, tests nuevos y la salida resumida de `npm run check`.

@@ -21,6 +21,16 @@ La idea central: **la especificación es la fuente de verdad y el código se der
 
 Todo vive en `specs/<ID>-<slug>/`. El archivo `specs/ACTIVA` dice cuál es la feature en curso, y un hook bloquea cambios en `api/src`, `api/test` y `web/src` mientras esa spec no esté aprobada y no existan el plan y las tareas.
 
+## Tamaño de una feature
+
+Una feature entra en el pipeline si se puede especificar, implementar y verificar en menos de una hora:
+
+- 1 historia de usuario (2 como máximo) y 2 a 4 criterios de aceptación.
+- La spec tiene entre 3 y 6 escenarios y como mucho 3 preguntas abiertas.
+- `tareas.md` tiene entre 3 y 6 tareas.
+
+Si es más grande, se parte en Trello antes de leerla. Partir bien es parte del trabajo.
+
 ## Trazabilidad (la regla que más se evalúa)
 
 ```

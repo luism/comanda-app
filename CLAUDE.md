@@ -34,8 +34,11 @@ npm run reset-db     # vuelve la base a cero
 |---|---|
 | F1.1 Ver el menú · F1.2 Carrito · F2.1 Datos de entrega | Hechas (proyecto base) |
 | F2.2 Pago en efectivo con vuelto | Backlog |
-| F3.1 Panel de pedidos del local | Backlog |
-| F3.2 Seguimiento del pedido | Backlog |
+| F3.1 Lista de pedidos del local | Backlog |
+| F3.2 Avanzar el estado de un pedido | Backlog |
+| F3.3 Seguimiento del pedido | Backlog |
+
+Las features son chicas a propósito (una historia, tres criterios): cada una se recorre entera en clase.
 
 ## Reglas generales
 

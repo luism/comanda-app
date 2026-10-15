@@ -21,7 +21,9 @@ npm run dev                           # dejarlo corriendo en una terminal aparte
 - Corré `node scripts/trello-leer.mjs --listar` para dejar actualizada la copia offline del tablero.
 - Si querés empezar limpio: `npm run reset-db`.
 
-> **Plan B.** La rama `demo/f2.2-resuelta` tiene F2.2 ya recorrida por el pipeline completo (spec, plan, tareas, código, verificación). Si algo se traba en vivo: `git switch demo/f2.2-resuelta` y mostrás los artefactos.
+> **Tiempos de referencia** (medidos en un ensayo con Claude Code): leer ~10 s, spec ~1 min, plan ~1 min, tareas ~30 s, implementar 2 a 3 min, verificar ~1 min. Una feature completa entra en 15 a 20 minutos contando la discusión.
+>
+> **Plan B si se corta internet:** todos los comandos de lectura aceptan `--offline` y usan la copia del tablero en `backlog/trello-snapshot.json`. Claude Code sí necesita conexión.
 
 ---
 
@@ -47,10 +49,12 @@ Mostrar en Trello:
 | Columna | Qué hay |
 |---|---|
 | 📚 Épicas | E1 Catálogo y Carrito · E2 Checkout contra entrega · E3 Gestión del local |
-| 📋 Backlog | **F2.2** Pago en efectivo con vuelto · **F3.1** Panel del local · F3.2 Seguimiento |
+| 📋 Backlog | **F2.2** Pago en efectivo con vuelto · **F3.1** Lista de pedidos del local · F3.2 Avanzar estado · F3.3 Seguimiento |
 | ✅ Hecho | F1.1 Menú · F1.2 Carrito · F2.1 Datos de entrega (ya están en el proyecto base) |
 
-Abrir la tarjeta F2.2 y señalar: épica, dependencia, historias en formato "Como… quiero… para…", criterios Dado/Cuando/Entonces con **valores concretos** ($8.500, $10.000, $1.500).
+Abrir la tarjeta F2.2 y señalar: épica, dependencia, la historia en formato "Como… quiero… para…", criterios Dado/Cuando/Entonces con **valores concretos** ($8.500, $10.000, $1.500).
+
+Remarcar el tamaño: **una historia, tres criterios**. Una feature que no entra en una clase se parte en Trello antes de empezar. (Contarles que en el ensayo una versión más grande de F2.2 generó 15 escenarios.)
 
 Mostrar la app funcionando: menú → carrito → checkout. Remarcar que **todavía no se puede indicar con cuánto se paga**: eso es F2.2.
 
@@ -103,8 +107,8 @@ El hook lo bloquea: *"SDD: la spec … está en estado "sin spec". No se escribe
 /sdd:spec
 ```
 - Trabaja el subagente **analista-specs**. Mostrar que aparece como subagente en el panel.
-- Abrir `spec.md`: reglas de negocio, tabla de escenarios `CA-08.1`, `CA-08.2`…, contrato de API, preguntas abiertas.
-- Discutir con la clase una pregunta abierta. Típicas: *¿el campo pagaCon es obligatorio? ¿qué pasa con pedidos viejos que no lo tienen? ¿se aceptan montos absurdos, como $1.000.000 para un pedido de $8.500?*
+- Abrir `spec.md`: reglas de negocio, tabla de escenarios `CA-08.1`, `CA-08.2`…, contrato de API, preguntas abiertas (como mucho tres, cada una con una propuesta).
+- Discutir con la clase las preguntas abiertas. Las que salieron en el ensayo: *¿`pagaCon` es obligatorio en la API? ¿qué pasa con los pedidos viejos que no lo tienen? ¿hay un monto máximo?* Ninguna está en la tarjeta: aparecen recién cuando alguien intenta escribir la spec. Ese es el punto de SDD.
 - Si hace falta, editar `spec.md` a mano frente a ellos. **La spec es de las personas.**
 
 ### 4.5 Aprobar (la puerta humana)
@@ -139,7 +143,7 @@ Este comando tiene `disable-model-invocation: true`: Claude no puede aprobarse a
 
 ---
 
-## 5. Demo en vivo · Feature 2: F3.1 Panel de pedidos del local (25 min)
+## 5. Demo en vivo · Feature 2: F3.1 Lista de pedidos del local (20 min)
 
 Ahora la versión "de corrido", para mostrar que el flujo es repetible:
 
@@ -150,19 +154,21 @@ npm run demo-pedidos        # en otra terminal: carga 3 pedidos de ejemplo
 /sdd:todo F3.1
 ```
 - El comando orquesta todo el pipeline y **se frena solo** después de la spec, esperando la aprobación.
-- Revisar con la clase los escenarios de la máquina de estados: RECIBIDO → EN_PREPARACION → EN_CAMINO → ENTREGADO, y los 409 por transiciones inválidas.
+- Revisar con la clase los escenarios: qué estados se muestran, en qué orden, qué devuelve `GET /api/pedidos`.
 - `/sdd:aprobar` y decirle "seguí".
-- Al terminar: abrir http://localhost:5173/local (o la ruta que haya definido la spec), avanzar un pedido de estado, intentar cancelar uno EN_CAMINO.
+- Al terminar: abrir http://localhost:5173/local y ver los pedidos de ejemplo. Hacer un pedido nuevo desde el menú y recargar `/local`.
 
-Pregunta para la clase: *¿qué pasó con el vuelto de F2.2 en el panel? ¿Lo pedía la tarjeta?* (Sí: HU-10 dice que si el pedido tiene datos de pago, se muestran. Es un ejemplo de dependencia entre features que la spec tiene que capturar.)
+Pregunta para la clase: *si F2.2 ya estaba hecha, ¿la lista debería mostrar el vuelto? ¿Lo pide la tarjeta?* (No lo pide. Si el local lo quiere, es otra historia para el backlog, no algo que el desarrollador agrega "porque ya estaba".)
 
 ---
 
-## 6. Si sobra tiempo: F3.2 Seguimiento (10 min)
+## 6. Si sobra tiempo: F3.2 Avanzar el estado (15 min)
 ```
 /sdd:todo F3.2
 ```
-Buen ejemplo de una regla de privacidad en la spec: la API pública de seguimiento **no devuelve teléfono ni dirección**. Ver si el revisor-qa lo controla.
+Buen ejemplo de regla de negocio con error: avanzar un pedido ENTREGADO devuelve 409. Ver cómo el analista arma los escenarios de cada transición.
+
+**F3.3 Seguimiento** queda como ejercicio para los grupos.
 
 ---
 

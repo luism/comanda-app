@@ -8,7 +8,7 @@ Leé `specs/ACTIVA`, y de esa carpeta `spec.md` y `plan.md`. Si falta alguno, de
 
 Usando la plantilla `tareas.md` del skill `metodo-sdd`, escribí `tareas.md` en la carpeta de la feature:
 
-- Tareas de 5 a 15 minutos cada una, numeradas T1, T2, …
+- Entre 3 y 6 tareas, numeradas T1, T2, … La feature es chica: no la partas de más.
 - Primero dominio y API con sus tests, después frontend, al final la verificación.
 - Cada tarea dice qué escenarios de la spec cubre (`[CA-08.1]`) y cuándo se considera hecha.
 - Todos los escenarios de aceptación de la spec tienen que aparecer en al menos una tarea. Si alguno queda afuera, avisá.

@@ -7,7 +7,7 @@ allowed-tools: Read, Edit(./specs/**)
 
 Leé `specs/ACTIVA` y abrí el `spec.md` de esa carpeta.
 
-1. Si la sección "Preguntas abiertas" tiene preguntas sin responder, listalas y preguntá si se aprueba igual. No sigas hasta tener una respuesta.
+1. Si la sección "Preguntas abiertas" tiene preguntas, listalas con su propuesta y preguntá si se aprueban así. No sigas hasta tener una respuesta. Si la persona cambia alguna, actualizá la spec con su decisión. Al aprobar, marcá cada pregunta como `[x]` con la decisión tomada.
 2. Si se confirma, editá **solo el frontmatter** de `spec.md`:
    - `estado: aprobada`
    - `aprobada_por: $ARGUMENTS` (si no se pasó nombre, poné "docente")

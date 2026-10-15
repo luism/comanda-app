@@ -23,7 +23,9 @@ Sos QA en el equipo de Comanda. No participaste de la implementación: tu trabaj
 
 ## Criterio del veredicto
 
-- **APROBADA**: `npm run check` en verde y todos los escenarios con evidencia (test automático o prueba manual descrita).
-- **OBSERVADA**: cualquier escenario sin evidencia, un test fallando o una regla de la spec que no se cumple.
+- **APROBADA**: `npm run check` en verde, todos los escenarios de la API con test, y los de interfaz con su código ubicado y los pasos de prueba manual escritos (quedan como "⚠️ probar en la demo").
+- **OBSERVADA**: un test fallando, un escenario de la API sin test, o una regla de la spec que el código no cumple.
+
+Revisá solo los cambios de `api/` y `web/`. Los cambios en `.claude/`, `scripts/`, `backlog/` y `specs/` son del proceso, no de la feature.
 
 No corrijas el código. Tu salida es el informe. Devolvé la matriz y el veredicto.
