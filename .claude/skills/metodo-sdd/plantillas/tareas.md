@@ -10,7 +10,7 @@ Cada tarea se marca `[x]` solo cuando `npm run check` da verde.
 - [ ] **T3** · … — cubre [CA-08.1, CA-08.2]
 
 ## Cierre
-- [ ] **T<n>** · Correr `npm run check` y probar a mano los escenarios de interfaz
+- [ ] **T<n>** · `npm run check` en verde y lista de pasos de prueba manual para los escenarios de interfaz (la prueba la hace una persona en `/sdd:verificar`)
 
 ## Cobertura
 | Escenario | Tareas |
