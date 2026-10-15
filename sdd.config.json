@@ -1,0 +1,8 @@
+{
+  "$comentario": "Configuración del pipeline SDD. Cada grupo cambia boardUrl por la URL de su propio tablero (tiene que ser público).",
+  "trello": {
+    "boardUrl": "https://trello.com/b/9l2wJjtU/comanda-app-de-pedidos-demo-sdd"
+  },
+  "specsDir": "specs",
+  "snapshot": "backlog/trello-snapshot.json"
+}

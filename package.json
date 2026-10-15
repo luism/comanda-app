@@ -1,0 +1,25 @@
+{
+  "name": "comanda",
+  "private": true,
+  "version": "0.1.0",
+  "description": "App de pedidos con pago en efectivo contra entrega. Proyecto de demo del pipeline SDD (Taller Integrador II, UNSTA 2026).",
+  "workspaces": [
+    "api",
+    "web"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c blue,green \"npm run dev -w api\" \"npm run dev -w web\"",
+    "test": "npm test -w api",
+    "typecheck": "npm run typecheck -w api && npm run typecheck -w web",
+    "check": "npm run typecheck && npm test",
+    "leer-feature": "node scripts/trello-leer.mjs",
+    "reset-db": "node scripts/reset-db.mjs",
+    "demo-pedidos": "node scripts/demo-pedidos.mjs"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

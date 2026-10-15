@@ -1,0 +1,9 @@
+{
+  "files.associations": { "ACTIVA": "plaintext" },
+  "markdown.preview.breaks": true,
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "feature.md": "spec.md, plan.md, tareas.md, verificacion.md"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
+}

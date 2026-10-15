@@ -1,0 +1,7 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "Comanda: levantar app", "type": "npm", "script": "dev", "isBackground": true, "problemMatcher": [] },
+    { "label": "Comanda: check (tipos + tests)", "type": "npm", "script": "check", "group": "test", "problemMatcher": ["$tsc"] }
+  ]
+}
