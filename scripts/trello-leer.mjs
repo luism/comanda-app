@@ -86,8 +86,10 @@ const tarjetas = datos.tarjetas.map((t) => ({ ...t, codigo: codigo(t.nombre), ti
 if (listar) {
   console.log(`\nTablero: ${datos.tablero}\n`)
   for (const t of tarjetas.filter((t) => t.codigo).sort((a, b) => a.codigo.localeCompare(b.codigo, 'es', { numeric: true }))) {
-    const sangria = t.codigo.startsWith('E') ? '' : '   '
-    console.log(`${sangria}${t.codigo.padEnd(6)} ${t.titulo.padEnd(42)} [${t.lista}]`)
+    const esEpica = t.codigo.startsWith('E')
+    const depende = t.descripcion.match(/\*\*Depende de:\*\*\s*([^\n]+)/)?.[1]?.trim()
+    const extra = !esEpica && depende && depende !== '—' ? `  depende de ${depende}` : ''
+    console.log(`${esEpica ? '' : '   '}${t.codigo.padEnd(6)} ${t.titulo.padEnd(40)} [${t.lista}]${extra}`)
   }
   console.log('')
   process.exit(0)

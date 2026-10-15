@@ -1,7 +1,7 @@
 ---
 description: Paso 1 del pipeline SDD. Lee una feature de Trello y la deja en specs/<ID>/feature.md
 argument-hint: <ID de la feature, ej. F2.2> [--offline]
-allowed-tools: Bash(node scripts/trello-leer.mjs *), Read, Write(./specs/ACTIVA)
+allowed-tools: Bash(node scripts/trello-leer.mjs *), Read, Edit(./specs/**)
 ---
 
 Vamos a empezar a trabajar la feature **$ARGUMENTS** con el pipeline SDD.

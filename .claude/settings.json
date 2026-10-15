@@ -16,8 +16,7 @@
       "Bash(git commit *)",
       "Bash(curl -s http://localhost*)",
       "Read(./**)",
-      "Edit(./specs/**)",
-      "Write(./specs/**)"
+      "Edit(./specs/**)"
     ],
     "ask": [
       "Bash(npm install *)",

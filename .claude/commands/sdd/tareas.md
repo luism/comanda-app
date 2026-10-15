@@ -1,7 +1,7 @@
 ---
 description: Paso 4 del pipeline SDD. Parte el plan en tareas chicas y ordenadas (tareas.md)
 argument-hint: (sin argumentos, usa la feature activa)
-allowed-tools: Read, Glob, Grep, Write(./specs/**)
+allowed-tools: Read, Glob, Grep, Edit(./specs/**)
 ---
 
 Leé `specs/ACTIVA`, y de esa carpeta `spec.md` y `plan.md`. Si falta alguno, decí cuál y pará.
